@@ -30,8 +30,14 @@
     document.addEventListener("DOMContentLoaded", () => {
       const container = document.getElementById("testimonial-grid");
 
-      // Load testimonials from localStorage
+      // ✅ Load testimonials from localStorage
       const testimonials = JSON.parse(localStorage.getItem("testimonials")) || [];
+
+      // If no testimonials are found, show a default message
+      if (testimonials.length === 0) {
+        container.innerHTML = "<p>No testimonials available. Please add one!</p>";
+        return;
+      }
 
       testimonials.forEach(t => {
         const card = document.createElement("article");
