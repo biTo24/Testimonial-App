@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Testimonial Cards</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <h1>Testimonial Cards</h1>
+    <p>Discover what our users are saying about their experiences with our platform.</p>
+  </header>
+  
+  <!-- Add Testimonial Button -->
+  <div class="button-container">
+    <a href="create-testimonial.html" class="btn">Add Testimonial</a>
+  </div>
+
+  <!-- Main Section -->
+  <main>
+    <section class="testimonial-grid" id="testimonial-grid">
+      <!-- Testimonial cards will be injected here by JavaScript -->
+    </section>
+  </main>
+
+
+  <!-- Footer -->
+  <footer class="footer">
+    &copy; 2025 <a href="https://github.com/biTo24" target="_blank" rel="noopener noreferrer">Arbi Pacolli</a> All rights reserved.
+  </footer>
+
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+  const container = document.getElementById("testimonial-grid");
+
+  // ✅ Load testimonials from the backend server (not from localStorage)
+  fetch("http://localhost:3000/testimonials")
+    .then((response) => response.json())
+    .then((data) => {
+      const testimonials = data.testimonials || [];
+
+      testimonials.forEach(t => {
+        const card = document.createElement("article");
+        card.classList.add("quote-card");
+        card.innerHTML = `
+          <blockquote>
+            <p>${t.quote}</p>
+            <footer>— <cite>${t.author}, ${t.company}</cite></footer>
+          </blockquote>
+        `;
+        container.appendChild(card);
+      });
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      alert("Failed to load testimonials.");
+    });
+});
+  </script>
+
+</body>
+</html>

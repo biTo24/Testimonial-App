@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="create-testimonial.css" />
+  <title>Create Testimonial</title>
+</head>
+<body>
+  <div class="header">
+    <h1>Create a Testimonial</h1>
+  </div>
+  <form id="testimonialForm">
+    <label for="name">Your Name</label>
+    <input type="text" id="name" name="name" placeholder="Enter your name" required />
+
+    <label for="testimonial">Your Testimonial</label>
+    <textarea id="testimonial" name="testimonial" rows="5" placeholder="Write your testimonial here..." required></textarea>
+
+    <label for="company-name">Company Name</label>
+    <input type="text" id="company-name" name="company-name" placeholder="Enter company name" required />
+
+    <button type="submit">Submit</button>
+    <button type="button" id="backBtn" onclick="window.location.href='index.html'">Back</button>
+  </form>
+
+  <script>
+document.getElementById("testimonialForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const name = document.getElementById("name").value.trim();
+  const testimonial = document.getElementById("testimonial").value.trim();
+  const company = document.getElementById("company-name").value.trim();
+
+  if (name && testimonial && company) {
+    const newTestimonial = {
+      quote: testimonial,
+      author: name,
+      company: company
+    };
+
+    // Send the testimonial to the backend server
+    fetch("http://localhost:3000/testimonials", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newTestimonial),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.message === "Testimonial saved successfully!") {
+          alert("✅ Testimonial submitted successfully!");
+          window.location.href = "index.html"; // Redirect to view testimonials
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        alert("Error submitting testimonial.");
+      });
+  } else {
+    alert("Please fill in all fields.");
+  }
+});
+
+  </script>
+</body>
+</html>
