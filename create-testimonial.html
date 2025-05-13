@@ -25,44 +25,29 @@
   </form>
 
   <script>
-document.getElementById("testimonialForm").addEventListener("submit", function (e) {
-  e.preventDefault();
+    document.getElementById("testimonialForm").addEventListener("submit", function(e) {
+      e.preventDefault();
 
-  const name = document.getElementById("name").value.trim();
-  const testimonial = document.getElementById("testimonial").value.trim();
-  const company = document.getElementById("company-name").value.trim();
+      const name = document.getElementById("name").value.trim();
+      const testimonial = document.getElementById("testimonial").value.trim();
+      const company = document.getElementById("company-name").value.trim();
 
-  if (name && testimonial && company) {
-    const newTestimonial = {
-      quote: testimonial,
-      author: name,
-      company: company
-    };
+      if (name && testimonial && company) {
+        const newTestimonial = { name, testimonial, company };
 
-    // Send the testimonial to the backend server
-    fetch("http://localhost:3000/testimonials", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newTestimonial),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.message === "Testimonial saved successfully!") {
-          alert("✅ Testimonial submitted successfully!");
-          window.location.href = "index.html"; // Redirect to view testimonials
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-        alert("Error submitting testimonial.");
-      });
-  } else {
-    alert("Please fill in all fields.");
-  }
-});
+        // Get existing testimonials from localStorage or initialize with an empty array
+        let testimonials = JSON.parse(localStorage.getItem("testimonials")) || [];
+        testimonials.push(newTestimonial);
 
+        // Save updated testimonials back to localStorage
+        localStorage.setItem("testimonials", JSON.stringify(testimonials));
+
+        alert("✅ Testimonial submitted successfully!");
+        window.location.href = "index.html"; // Redirect back to the main page
+      } else {
+        alert("Please fill in all fields.");
+      }
+    });
   </script>
 </body>
 </html>
