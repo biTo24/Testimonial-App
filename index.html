@@ -19,6 +19,9 @@
     <section class="testimonial-grid" id="testimonial-grid">
       <!-- Testimonial cards will be injected here by JavaScript -->
     </section>
+
+    <!-- Add Testimonial Button -->
+    <button id="addTestimonialBtn" onclick="window.location.href='create-testimonial.html'">Add Testimonial</button>
   </main>
 
   <!-- Footer -->
@@ -30,26 +33,24 @@
     document.addEventListener("DOMContentLoaded", () => {
       const container = document.getElementById("testimonial-grid");
 
-      // ✅ Load testimonials from localStorage
+      // ✅ Load testimonials from localStorage (not from file)
       const testimonials = JSON.parse(localStorage.getItem("testimonials")) || [];
 
-      // If no testimonials are found, show a default message
       if (testimonials.length === 0) {
         container.innerHTML = "<p>No testimonials available. Please add one!</p>";
-        return;
+      } else {
+        testimonials.forEach(t => {
+          const card = document.createElement("article");
+          card.classList.add("quote-card");
+          card.innerHTML = `
+            <blockquote>
+              <p>${t.testimonial}</p>
+              <footer>— <cite>${t.name}, ${t.company}</cite></footer>
+            </blockquote>
+          `;
+          container.appendChild(card);
+        });
       }
-
-      testimonials.forEach(t => {
-        const card = document.createElement("article");
-        card.classList.add("quote-card");
-        card.innerHTML = `
-          <blockquote>
-            <p>${t.testimonial}</p>
-            <footer>— <cite>${t.name}, ${t.company}</cite></footer>
-          </blockquote>
-        `;
-        container.appendChild(card);
-      });
     });
   </script>
 
