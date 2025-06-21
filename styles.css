@@ -30,44 +30,34 @@ body {
 
 /* Center the button under the header */
 .btn-container {
-  display: flex;
+  display: block;
   justify-content: center;
   align-items: center;
   margin-top: 20px; /* Adjust spacing between header and button */
 }
 
-/* Add Testimonial Button Styles */
+/* Button Styles */
 .btn {
-  display: inline-block;
-  margin: 20px auto;
-  padding: 14px 28px;
-  font-size: 1.1rem;
+  display: flex;
+  margin: 0 auto;
+  padding: 8px 10px;
+  font-size: 1rem;
   font-weight: bold;
-  color: #ffffff;
-  background-color: #0055ff;
+  color: #fff;
+  background: #0055ff;
   border: none;
-  border-radius: 50px; /* Rounded button for a modern look */
-  text-align: center;
-  text-decoration: none;
+  border-radius: 10px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-  position: fixed; /* Fixed for consistent placement */
-  top: 50%; /* Center vertically */
-  left: 50%; /* Center horizontally */
-  transform: translate(-50%, -50%); /* Adjust for element's size */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Add subtle shadow */
+  transition: background 0.2s, transform 0.2s;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
 }
-
-.btn:hover {
-  background-color: #003bb3;
-  transform: translate(-50%, -50%) scale(1.1); /* Slightly larger on hover */
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Enhance shadow on hover */
+/* .btn:hover {
+  background: #003bb3;
+  transform: scale(1.07);
 }
-
 .btn:active {
-  transform: translate(-50%, -50%) scale(1); /* Reset scaling on active */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Reset shadow on active */
-}
+  transform: scale(1);
+} */
 
 /* Grid layout for testimonials */
 .testimonial-grid {
@@ -90,11 +80,31 @@ body {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
   position: relative;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  margin-left: 0; /* Align to the left */
+  justify-self: start; /* For grid alignment to the left */
+  max-width: 400px; /* Optional: limit width for "bucket" look */
 }
 
+/* Make the testimonial grid align items to the left */
+.testimonial-grid {
+  justify-items: start;
+}
+
+/* Add a "bucket" effect with a colored left border */
+.quote-card {
+  border-left: 8px solid #0055ff;
+  box-shadow: 0 4px 20px rgba(0, 85, 255, 0.08);
+}
+
+/* Optional: Add a subtle background gradient for the bucket */
+.quote-card {
+  background: linear-gradient(90deg, #eaf1ff 0 20px, #fff 20px 100%);
+}
+
+/* On hover, slightly lift and enhance shadow */
 .quote-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 8px 24px rgba(0, 85, 255, 0.18);
 }
 
 /* Blockquote styles */
@@ -105,21 +115,25 @@ body {
   font-style: italic;
 }
 
+/* Large quote mark on the left */
 .quote-card blockquote::before {
+  content: "“";
   font-size: 3rem;
   color: #0055ff;
   position: absolute;
-  left: -10px;
+  left: -36px;
   top: -10px;
   font-family: Georgia, serif;
+  line-height: 1;
 }
 
 /* Quote text styles */
 .quote-card p {
   font-size: 1.05rem;
   line-height: 2;
-  margin: 20px 0 1rem 0; /* Added top margin to move the text down more */
+  margin: 20px 0 1rem 0;
   color: #222222;
+  padding-left: 16px; /* Indent text for bucket effect */
 }
 
 /* Footer of the quote card */
@@ -138,12 +152,17 @@ body {
 
 /* Footer styles */
 .footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
   text-align: center;
   padding: 20px;
   font-size: 0.9rem;
   color: #ffffff;
   background-color: #333333; /* Add a contrasting background */
   border-top: 2px solid #0055ff; /* Add a top border for separation */
+  z-index: 100;
 }
 
 /* Footer links styles */
