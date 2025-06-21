@@ -30,7 +30,7 @@ body {
 
 /* Center the button under the header */
 .btn-container {
-  display: block;
+  display: flex; /* Change from block to flex for justify-content and align-items to work */
   justify-content: center;
   align-items: center;
   margin-top: 20px; /* Adjust spacing between header and button */
@@ -38,8 +38,6 @@ body {
 
 /* Button Styles */
 .btn {
-  display: flex;
-  margin: 0 auto;
   padding: 8px 10px;
   font-size: 1rem;
   font-weight: bold;
@@ -50,14 +48,17 @@ body {
   cursor: pointer;
   transition: background 0.2s, transform 0.2s;
   box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  margin: 0 auto; /* Center horizontally */
 }
-/* .btn:hover {
+
+.btn:hover {
   background: #003bb3;
   transform: scale(1.07);
 }
+
 .btn:active {
   transform: scale(1);
-} */
+}
 
 /* Grid layout for testimonials */
 .testimonial-grid {
@@ -69,39 +70,24 @@ body {
   padding: 20px;
   position: relative;
   z-index: 1; /* Ensure grid content stays above the background */
+  justify-items: start; /* Align testimonial cards to left */
 }
 
 /* Quote card styles */
 .quote-card {
-  background-color: #ffffff;
+  background: linear-gradient(90deg, #eaf1ff 0 20px, #fff 20px 100%);
   color: #333333;
   padding: 24px;
   border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 20px rgba(0, 85, 255, 0.08);
+  border-left: 8px solid #0055ff;
   position: relative;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  margin-left: 0; /* Align to the left */
+  max-width: 400px; /* Limit width for "bucket" look */
   justify-self: start; /* For grid alignment to the left */
-  max-width: 400px; /* Optional: limit width for "bucket" look */
+  margin-left: 0; /* Align to the left */
 }
 
-/* Make the testimonial grid align items to the left */
-.testimonial-grid {
-  justify-items: start;
-}
-
-/* Add a "bucket" effect with a colored left border */
-.quote-card {
-  border-left: 8px solid #0055ff;
-  box-shadow: 0 4px 20px rgba(0, 85, 255, 0.08);
-}
-
-/* Optional: Add a subtle background gradient for the bucket */
-.quote-card {
-  background: linear-gradient(90deg, #eaf1ff 0 20px, #fff 20px 100%);
-}
-
-/* On hover, slightly lift and enhance shadow */
 .quote-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 8px 24px rgba(0, 85, 255, 0.18);
@@ -111,8 +97,8 @@ body {
 .quote-card blockquote {
   margin: 0;
   padding: 0;
-  position: relative;
   font-style: italic;
+  position: relative;
 }
 
 /* Large quote mark on the left */

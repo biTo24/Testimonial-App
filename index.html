@@ -2,53 +2,28 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Testimonial Cards</title>
+  <title>Testimonials</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-
-  <!-- Header -->
-  <header class="header">
-    <h1>Testimonial Cards</h1>
-    <p>Discover what our users are saying about their experiences with our platform.</p>
-  </header>
-  <!-- Add Testimonial Button -->
-  <div class="btn">
-    <button id="addTestimonialBtn" onclick="window.location.href='create-testimonial.html'">Add Testimonial</button>
-  </div>
-  
-
-  <!-- Main Section -->
-  <main>
-    <section class="testimonial-grid" id="testimonial-grid">
-      <!-- Testimonial cards will be injected here by JavaScript -->
-    </section>
-
-  </main>
-
-  <!-- Footer -->
-  <footer class="footer">
-    &copy; 2025 <a href="https://github.com/biTo24" target="_blank" rel="noopener noreferrer">Arbi Pacolli</a> All rights reserved.
-  </footer>
+  <h1>Testimonials</h1>
+  <div id="testimonial-grid"></div>
+  <a href="create-testimonial.html">Add Testimonial</a>
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const container = document.getElementById("testimonial-grid");
-
-      // ✅ Load testimonials from localStorage (not from file)
       const testimonials = JSON.parse(localStorage.getItem("testimonials")) || [];
 
       if (testimonials.length === 0) {
-        container.innerHTML = "<p>No testimonials available. Please add one!</p>";
+        container.innerHTML = "<p>No testimonials yet.</p>";
       } else {
         testimonials.forEach(t => {
-          const card = document.createElement("article");
-          card.classList.add("quote-card");
+          const card = document.createElement("div");
           card.innerHTML = `
             <blockquote>
               <p>${t.testimonial}</p>
-              <footer>— <cite>${t.name}, ${t.company}</cite></footer>
+              <footer>— ${t.name}, ${t.company}</footer>
             </blockquote>
           `;
           container.appendChild(card);
@@ -56,6 +31,5 @@
       }
     });
   </script>
-
 </body>
 </html>

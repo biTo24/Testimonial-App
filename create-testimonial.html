@@ -2,52 +2,36 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="create-testimonial.css" />
   <title>Create Testimonial</title>
+  <link rel="stylesheet" href="create-testimonial.css" />
 </head>
 <body>
-  <div class="header">
-    <h1>Create a Testimonial</h1>
-  </div>
+  <h1>Create a Testimonial</h1>
   <form id="testimonialForm">
-    <label for="name">Your Name</label>
-    <input type="text" id="name" name="name" placeholder="Enter your name" required />
-
-    <label for="testimonial">Your Testimonial</label>
-    <textarea id="testimonial" name="testimonial" rows="5" placeholder="Write your testimonial here..." required></textarea>
-
-    <label for="company-name">Company Name</label>
-    <input type="text" id="company-name" name="company-name" placeholder="Enter company name" required />
-
+    <input type="text" id="name" placeholder="Your Name" required /><br/>
+    <textarea id="testimonial" placeholder="Your Testimonial" required></textarea><br/>
+    <input type="text" id="company" placeholder="Company Name" required /><br/>
     <button type="submit">Submit</button>
-    <button type="button" id="backBtn" onclick="window.location.href='index.html'">Back</button>
+    <button type="button" onclick="window.location.href='index.html'">Back</button>
   </form>
 
   <script>
-    document.getElementById("testimonialForm").addEventListener("submit", function(e) {
+    document.getElementById('testimonialForm').addEventListener('submit', e => {
       e.preventDefault();
 
-      const name = document.getElementById("name").value.trim();
-      const testimonial = document.getElementById("testimonial").value.trim();
-      const company = document.getElementById("company-name").value.trim();
+      const name = document.getElementById('name').value.trim();
+      const testimonial = document.getElementById('testimonial').value.trim();
+      const company = document.getElementById('company').value.trim();
 
-      if (name && testimonial && company) {
-        const newTestimonial = { name, testimonial, company };
-
-        // Get existing testimonials from localStorage or initialize with an empty array
-        let testimonials = JSON.parse(localStorage.getItem("testimonials")) || [];
-        testimonials.push(newTestimonial);
-
-        // Save updated testimonials back to localStorage
-        localStorage.setItem("testimonials", JSON.stringify(testimonials));
-
-        alert("✅ Testimonial submitted successfully!");
-        window.location.href = "index.html"; // Redirect back to the main page
+      if(name && testimonial && company){
+        const testimonials = JSON.parse(localStorage.getItem('testimonials')) || [];
+        testimonials.push({name, testimonial, company});
+        localStorage.setItem('testimonials', JSON.stringify(testimonials));
+        alert('Testimonial saved!');
+        window.location.href = 'index.html';
       } else {
-        alert("Please fill in all fields.");
+        alert('Please fill in all fields.');
       }
     });
   </script>
 </body>
-</html>
