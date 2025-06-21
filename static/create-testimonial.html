@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Add Testimonial</title>
+</head>
+<body>
+  <h1>Add Testimonial</h1>
+  <form id="testimonialForm">
+    <input type="text" id="name" placeholder="Name" required /><br />
+    <input type="text" id="company" placeholder="Company" required /><br />
+    <textarea id="testimonial" placeholder="Your testimonial" required></textarea><br />
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    document.getElementById("testimonialForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const name = document.getElementById("name").value;
+      const company = document.getElementById("company").value;
+      const testimonial = document.getElementById("testimonial").value;
+
+      await fetch("/api/testimonials", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ name, company, testimonial })
+      });
+
+      window.location.href = "/";
+    });
+  </script>
+</body>
+</html>

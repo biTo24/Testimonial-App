@@ -1,0 +1,34 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Testimonials</title>
+</head>
+<body>
+  <h1>Testimonials</h1>
+  <div id="testimonial-grid"></div>
+  <a href="create-testimonial.html">Add Testimonial</a>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      const res = await fetch("/api/testimonials");
+      const testimonials = await res.json();
+      const container = document.getElementById("testimonial-grid");
+
+      if (testimonials.length === 0) {
+        container.innerHTML = "<p>No testimonials yet.</p>";
+      } else {
+        testimonials.forEach(t => {
+          const card = document.createElement("div");
+          card.innerHTML = `<blockquote>
+            <p>${t.testimonial}</p>
+            <footer>— ${t.name}, ${t.company}</footer>
+          </blockquote>`;
+          container.appendChild(card);
+        });
+      }
+    });
+  </script>
+</body>
+</html>
